@@ -6,7 +6,7 @@ import android.util.Log;
 
 import com.tatar.personzz.R;
 import com.tatar.personzz.data.network.ApiClient;
-import com.tatar.personzz.data.network.ApiInterface;
+import com.tatar.personzz.data.network.ApiService;
 import com.tatar.personzz.data.network.modal.PersonzResponse;
 import com.tatar.personzz.data.network.modal.Result;
 
@@ -25,19 +25,20 @@ public class PersonzActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personz);
 
-        ApiInterface apiService =
-                ApiClient.getClient().create(ApiInterface.class);
+        ApiService apiService = ApiClient.getClient().create(ApiService.class);
 
         Call<PersonzResponse> call = apiService.getPersonz(10);
         call.enqueue(new Callback<PersonzResponse>() {
             @Override
-            public void onResponse(Call<PersonzResponse>call, Response<PersonzResponse> response) {
-                List<Result> results = response.body().getResults();
-                Log.d(TAG, "Number of results received: " + results.size());
+            public void onResponse(Call<PersonzResponse> call, Response<PersonzResponse> response) {
+                if (response.isSuccessful()) {
+                    List<Result> results = response.body().getResults();
+                    Log.d(TAG, "Number of results received: " + results.size());
+                }
             }
 
             @Override
-            public void onFailure(Call<PersonzResponse>call, Throwable t) {
+            public void onFailure(Call<PersonzResponse> call, Throwable t) {
                 // Log error here since request failed
                 Log.e(TAG, t.toString());
             }

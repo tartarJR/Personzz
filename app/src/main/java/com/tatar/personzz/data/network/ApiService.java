@@ -11,7 +11,7 @@ import retrofit2.http.Query;
  * Created by mobile on 7.02.2018.
  */
 
-public interface ApiInterface {
+public interface ApiService {
     @GET("api")
     Call<PersonzResponse> getPersonz(@Query("results") int size);
 }
