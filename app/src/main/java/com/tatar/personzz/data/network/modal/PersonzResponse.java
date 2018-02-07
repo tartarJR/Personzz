@@ -9,7 +9,7 @@ import java.util.List;
  * Created by mobile on 6.02.2018.
  */
 
-public class Personz {
+public class PersonzResponse {
     
     @SerializedName("results")
     @Expose
