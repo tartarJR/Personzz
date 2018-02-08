@@ -7,6 +7,8 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.jakewharton.picasso.OkHttp3Downloader;
+import com.squareup.picasso.Picasso;
 import com.tatar.personzz.R;
 import com.tatar.personzz.data.network.ApiService;
 import com.tatar.personzz.data.network.modal.PersonzResponse;
@@ -27,6 +29,7 @@ public class PersonzActivity extends AppCompatActivity {
     private static final String TAG = PersonzActivity.class.getSimpleName();
 
     Retrofit retrofit;
+    Picasso picasso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,9 @@ public class PersonzActivity extends AppCompatActivity {
                 .baseUrl("https://randomuser.me/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
+
+        OkHttp3Downloader okHttpDownloader = new OkHttp3Downloader(okHttpClient);
+        picasso = new Picasso.Builder(this).downloader(okHttpDownloader).build();
 
         Call<PersonzResponse> call = retrofit.create(ApiService.class).getPersonz(7);
         call.enqueue(new Callback<PersonzResponse>() {
