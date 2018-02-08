@@ -7,24 +7,20 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 import com.tatar.personzz.R;
-import com.tatar.personzz.data.network.ApiService;
+import com.tatar.personzz.data.network.PersonzzService;
 import com.tatar.personzz.data.network.modal.PersonzResponse;
 import com.tatar.personzz.data.network.modal.Result;
+import com.tatar.personzz.di.AppComponent;
+import com.tatar.personzz.di.DaggerAppComponent;
+import com.tatar.personzz.di.modules.ContextModule;
 
 import java.util.List;
 
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PersonzActivity extends AppCompatActivity {
 
@@ -33,7 +29,7 @@ public class PersonzActivity extends AppCompatActivity {
     private RecyclerView personzRecyclerView;
     private PersonzAdapter personzAdapter;
 
-    Retrofit retrofit;
+    PersonzzService personzzService;
     Picasso picasso;
 
     @Override
@@ -41,37 +37,17 @@ public class PersonzActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personz);
 
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        Gson gson = gsonBuilder.create();
-
-        HttpLoggingInterceptor httpLoggingInterceptor = new
-                HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(@NonNull String message) {
-                Log.i(TAG, message);
-            }
-        });
-
-        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        OkHttpClient okHttpClient = new OkHttpClient()
-                .newBuilder()
-                .addInterceptor(httpLoggingInterceptor)
+        AppComponent daggerRandomUserComponent = DaggerAppComponent.builder()
+                .contextModule(new ContextModule(this))
                 .build();
 
-        retrofit = new Retrofit.Builder()
-                .client(okHttpClient)
-                .baseUrl("https://randomuser.me/")
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-
-        OkHttp3Downloader okHttpDownloader = new OkHttp3Downloader(okHttpClient);
-        picasso = new Picasso.Builder(this).downloader(okHttpDownloader).build();
+        picasso = daggerRandomUserComponent.getPicasso();
+        personzzService = daggerRandomUserComponent.getPersonzzService();
 
         personzRecyclerView = findViewById(R.id.personz_recycler_view);
         personzRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        Call<PersonzResponse> call = retrofit.create(ApiService.class).getPersonz(20);
+        Call<PersonzResponse> call = personzzService.getPersonz(20);
         call.enqueue(new Callback<PersonzResponse>() {
             @Override
             public void onResponse(Call<PersonzResponse> call, @NonNull Response<PersonzResponse> response) {
