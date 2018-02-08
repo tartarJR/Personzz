@@ -3,6 +3,8 @@ package com.tatar.personzz.ui.personz;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -27,6 +29,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class PersonzActivity extends AppCompatActivity {
 
     private static final String TAG = PersonzActivity.class.getSimpleName();
+
+    private RecyclerView personzRecyclerView;
+    private PersonzAdapter personzAdapter;
 
     Retrofit retrofit;
     Picasso picasso;
@@ -63,13 +68,18 @@ public class PersonzActivity extends AppCompatActivity {
         OkHttp3Downloader okHttpDownloader = new OkHttp3Downloader(okHttpClient);
         picasso = new Picasso.Builder(this).downloader(okHttpDownloader).build();
 
-        Call<PersonzResponse> call = retrofit.create(ApiService.class).getPersonz(7);
+        personzRecyclerView = findViewById(R.id.personz_recycler_view);
+        personzRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        Call<PersonzResponse> call = retrofit.create(ApiService.class).getPersonz(20);
         call.enqueue(new Callback<PersonzResponse>() {
             @Override
             public void onResponse(Call<PersonzResponse> call, @NonNull Response<PersonzResponse> response) {
                 if (response.isSuccessful()) {
                     List<Result> results = response.body().getResults();
-                    Log.d(TAG, "Number of results received: " + results.size());
+
+                    personzAdapter = new PersonzAdapter(results, picasso);
+                    personzRecyclerView.setAdapter(personzAdapter);
                 }
             }
 

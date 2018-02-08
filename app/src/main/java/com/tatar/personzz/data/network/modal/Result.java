@@ -1,6 +1,5 @@
 package com.tatar.personzz.data.network.modal;
 
-import android.graphics.Picture;
 import android.location.Location;
 
 import com.google.gson.annotations.Expose;

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Personzz</string>
+    <string name="profile_pic_img_view_content_descr">user profile picture</string>
 </resources>
