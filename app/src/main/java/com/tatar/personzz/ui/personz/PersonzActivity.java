@@ -18,6 +18,8 @@ import com.tatar.personzz.di.modules.ContextModule;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,7 +31,10 @@ public class PersonzActivity extends AppCompatActivity {
     private RecyclerView personzRecyclerView;
     private PersonzAdapter personzAdapter;
 
+    @Inject
     PersonzzService personzzService;
+
+    @Inject
     Picasso picasso;
 
     @Override
@@ -41,12 +46,18 @@ public class PersonzActivity extends AppCompatActivity {
                 .contextModule(new ContextModule(this))
                 .build();
 
-        picasso = daggerRandomUserComponent.getPicasso();
-        personzzService = daggerRandomUserComponent.getPersonzzService();
+        daggerRandomUserComponent.inject(this);
 
+        initViews();
+        personzzCall();
+    }
+
+    private void initViews() {
         personzRecyclerView = findViewById(R.id.personz_recycler_view);
         personzRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
 
+    private void personzzCall() {
         Call<PersonzResponse> call = personzzService.getPersonz(20);
         call.enqueue(new Callback<PersonzResponse>() {
             @Override
@@ -65,6 +76,5 @@ public class PersonzActivity extends AppCompatActivity {
                 Log.e(TAG, t.toString());
             }
         });
-
     }
 }
