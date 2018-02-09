@@ -23,6 +23,7 @@ import javax.inject.Inject;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import timber.log.Timber;
 
 public class PersonzActivity extends AppCompatActivity {
 
@@ -41,6 +42,10 @@ public class PersonzActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personz);
+        
+        initViews();
+
+        Timber.plant(new Timber.DebugTree());
 
         AppComponent daggerRandomUserComponent = DaggerAppComponent.builder()
                 .contextModule(new ContextModule(this))
@@ -48,7 +53,6 @@ public class PersonzActivity extends AppCompatActivity {
 
         daggerRandomUserComponent.inject(this);
 
-        initViews();
         personzzCall();
     }
 
@@ -72,8 +76,7 @@ public class PersonzActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<PersonzResponse> call, Throwable t) {
-                // Log error here since request failed
-                Log.e(TAG, t.toString());
+                Timber.i(t.getMessage());
             }
         });
     }
