@@ -27,8 +27,6 @@ import timber.log.Timber;
 
 public class PersonzActivity extends AppCompatActivity {
 
-    private static final String TAG = PersonzActivity.class.getSimpleName();
-
     private RecyclerView personzRecyclerView;
     private PersonzAdapter personzAdapter;
 

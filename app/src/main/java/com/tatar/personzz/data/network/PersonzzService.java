@@ -11,7 +11,7 @@ import retrofit2.http.Query;
  */
 
 public interface PersonzzService {
-    @GET("api")
-    Call<PersonzResponse> getPersonz(@Query("results") int size);
+    @GET(PersonzzServiceConstants.GET_ALL_PERSONZ)
+    Call<PersonzResponse> getPersonz(@Query(PersonzzServiceConstants.GET_ALL_PERSONZ_QUERY_STRING) int size);
 }
 
