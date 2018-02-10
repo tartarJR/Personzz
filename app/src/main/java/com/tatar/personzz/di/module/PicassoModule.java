@@ -1,4 +1,4 @@
-package com.tatar.personzz.di.modules;
+package com.tatar.personzz.di.module;
 
 import android.content.Context;
 
