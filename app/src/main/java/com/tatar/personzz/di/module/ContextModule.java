@@ -1,4 +1,4 @@
-package com.tatar.personzz.di.modules;
+package com.tatar.personzz.di.module;
 
 import android.content.Context;
 
@@ -12,7 +12,7 @@ import dagger.Provides;
 @Module
 public class ContextModule {
 
-    Context context;
+    private Context context;
 
     public ContextModule(Context context) {
         this.context = context;

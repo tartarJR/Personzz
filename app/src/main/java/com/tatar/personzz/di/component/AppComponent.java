@@ -1,7 +1,7 @@
-package com.tatar.personzz.di;
+package com.tatar.personzz.di.component;
 
-import com.tatar.personzz.di.modules.PersonzzServiceModule;
-import com.tatar.personzz.di.modules.PicassoModule;
+import com.tatar.personzz.di.module.PersonzzServiceModule;
+import com.tatar.personzz.di.module.PicassoModule;
 import com.tatar.personzz.ui.personz.PersonzActivity;
 
 import dagger.Component;

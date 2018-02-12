@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.squareup.picasso.Picasso;
 import com.tatar.personzz.App;
@@ -13,9 +12,9 @@ import com.tatar.personzz.R;
 import com.tatar.personzz.data.network.PersonzzService;
 import com.tatar.personzz.data.network.modal.PersonzResponse;
 import com.tatar.personzz.data.network.modal.Result;
-import com.tatar.personzz.di.AppComponent;
+import com.tatar.personzz.di.component.AppComponent;
 import com.tatar.personzz.di.DaggerAppComponent;
-import com.tatar.personzz.di.modules.ContextModule;
+import com.tatar.personzz.di.module.ContextModule;
 
 import java.util.List;
 

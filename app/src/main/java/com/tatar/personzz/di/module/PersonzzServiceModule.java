@@ -1,7 +1,7 @@
-package com.tatar.personzz.di.modules;
+package com.tatar.personzz.di.module;
 
-import com.google.gson.Gson;
 import com.tatar.personzz.data.network.PersonzzService;
+import com.tatar.personzz.data.network.PersonzzServiceConstants;
 
 import dagger.Module;
 import dagger.Provides;
@@ -24,7 +24,7 @@ public class PersonzzServiceModule {
     public Retrofit retrofit(OkHttpClient okHttpClient, GsonConverterFactory gsonConverterFactory) {
         return new Retrofit.Builder()
                 .client(okHttpClient)
-                .baseUrl("https://randomuser.me/")
+                .baseUrl(PersonzzServiceConstants.BASE_URL)
                 .addConverterFactory(gsonConverterFactory)
                 .build();
     }

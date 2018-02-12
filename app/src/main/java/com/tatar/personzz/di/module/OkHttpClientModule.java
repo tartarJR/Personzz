@@ -1,4 +1,4 @@
-package com.tatar.personzz.di.modules;
+package com.tatar.personzz.di.module;
 
 import dagger.Module;
 import dagger.Provides;
