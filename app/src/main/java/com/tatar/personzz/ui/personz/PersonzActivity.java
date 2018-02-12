@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.squareup.picasso.Picasso;
+import com.tatar.personzz.App;
 import com.tatar.personzz.R;
 import com.tatar.personzz.data.network.PersonzzService;
 import com.tatar.personzz.data.network.modal.PersonzResponse;
@@ -27,8 +28,6 @@ import timber.log.Timber;
 
 public class PersonzActivity extends AppCompatActivity {
 
-    private static final String TAG = PersonzActivity.class.getSimpleName();
-
     private RecyclerView personzRecyclerView;
     private PersonzAdapter personzAdapter;
 
@@ -42,16 +41,12 @@ public class PersonzActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personz);
-        
+
         initViews();
 
         Timber.plant(new Timber.DebugTree());
 
-        AppComponent daggerRandomUserComponent = DaggerAppComponent.builder()
-                .contextModule(new ContextModule(this))
-                .build();
-
-        daggerRandomUserComponent.inject(this);
+        App.getAppComponent().inject(this);
 
         personzzCall();
     }
