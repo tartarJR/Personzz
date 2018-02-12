@@ -12,9 +12,6 @@ import com.tatar.personzz.R;
 import com.tatar.personzz.data.network.PersonzzService;
 import com.tatar.personzz.data.network.modal.PersonzResponse;
 import com.tatar.personzz.data.network.modal.Result;
-import com.tatar.personzz.di.component.AppComponent;
-import com.tatar.personzz.di.DaggerAppComponent;
-import com.tatar.personzz.di.module.ContextModule;
 
 import java.util.List;
 
