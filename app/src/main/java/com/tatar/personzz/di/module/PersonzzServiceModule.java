@@ -3,6 +3,8 @@ package com.tatar.personzz.di.module;
 import com.tatar.personzz.data.network.PersonzzService;
 import com.tatar.personzz.data.network.PersonzzServiceConstants;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
@@ -15,11 +17,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class PersonzzServiceModule {
+
+    @Singleton
     @Provides
     public PersonzzService personzzService(Retrofit retrofit) {
         return retrofit.create(PersonzzService.class);
     }
 
+    @Singleton
     @Provides
     public Retrofit retrofit(OkHttpClient okHttpClient, GsonConverterFactory gsonConverterFactory) {
         return new Retrofit.Builder()
@@ -29,6 +34,7 @@ public class PersonzzServiceModule {
                 .build();
     }
 
+    @Singleton
     @Provides
     public GsonConverterFactory gsonConverterFactory() {
         return GsonConverterFactory.create();
