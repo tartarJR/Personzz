@@ -18,14 +18,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class PersonzzServiceModule {
 
-    @Singleton
     @Provides
+    @Singleton
     public PersonzzService personzzService(Retrofit retrofit) {
         return retrofit.create(PersonzzService.class);
     }
 
-    @Singleton
     @Provides
+    @Singleton
     public Retrofit retrofit(OkHttpClient okHttpClient, GsonConverterFactory gsonConverterFactory) {
         return new Retrofit.Builder()
                 .client(okHttpClient)
@@ -34,8 +34,8 @@ public class PersonzzServiceModule {
                 .build();
     }
 
-    @Singleton
     @Provides
+    @Singleton
     public GsonConverterFactory gsonConverterFactory() {
         return GsonConverterFactory.create();
     }

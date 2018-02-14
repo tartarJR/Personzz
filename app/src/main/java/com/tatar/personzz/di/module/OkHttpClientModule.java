@@ -15,8 +15,8 @@ import timber.log.Timber;
 @Module
 public class OkHttpClientModule {
 
-    @Singleton
     @Provides
+    @Singleton
     public OkHttpClient okHttpClient(HttpLoggingInterceptor httpLoggingInterceptor) {
         return new OkHttpClient()
                 .newBuilder()
@@ -24,8 +24,8 @@ public class OkHttpClientModule {
                 .build();
     }
 
-    @Singleton
     @Provides
+    @Singleton
     public HttpLoggingInterceptor httpLoggingInterceptor() {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
