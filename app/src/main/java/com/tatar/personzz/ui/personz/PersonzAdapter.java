@@ -25,6 +25,7 @@ public class PersonzAdapter extends RecyclerView.Adapter<PersonzAdapter.ViewHold
     private List<Result> personList;
     private final Picasso picasso;
 
+    @Inject
     public PersonzAdapter(Picasso picasso) {
         personList = new ArrayList<>();
         this.picasso = picasso;

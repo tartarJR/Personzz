@@ -1,5 +1,6 @@
 package com.tatar.personzz.di.component;
 
+import com.squareup.picasso.Picasso;
 import com.tatar.personzz.di.module.PersonzzServiceModule;
 import com.tatar.personzz.di.module.PicassoModule;
 import com.tatar.personzz.ui.personz.PersonzActivity;
@@ -16,4 +17,5 @@ import dagger.Component;
 @Singleton
 public interface AppComponent {
     void inject(PersonzActivity personzActivity);
+    Picasso picasso();
 }
