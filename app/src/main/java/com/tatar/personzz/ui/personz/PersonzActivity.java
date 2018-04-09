@@ -50,6 +50,8 @@ public class PersonzActivity extends AppCompatActivity {
     private void initViews() {
         personzRecyclerView = findViewById(R.id.personz_recycler_view);
         personzRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        personzAdapter = new PersonzAdapter(picasso);
+        personzRecyclerView.setAdapter(personzAdapter);
     }
 
     private void personzzCall() {
@@ -60,8 +62,7 @@ public class PersonzActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     List<Result> results = response.body().getResults();
 
-                    personzAdapter = new PersonzAdapter(results, picasso);
-                    personzRecyclerView.setAdapter(personzAdapter);
+                    personzAdapter.setPersonList(results);
                 }
             }
 

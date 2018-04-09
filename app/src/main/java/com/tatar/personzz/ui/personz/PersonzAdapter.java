@@ -11,7 +11,10 @@ import com.squareup.picasso.Picasso;
 import com.tatar.personzz.R;
 import com.tatar.personzz.data.network.modal.Result;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 /**
  * Created by mobile on 8.02.2018.
@@ -22,8 +25,8 @@ public class PersonzAdapter extends RecyclerView.Adapter<PersonzAdapter.ViewHold
     private List<Result> personList;
     private final Picasso picasso;
 
-    public PersonzAdapter(List<Result> personList, Picasso picasso) {
-        this.personList = personList;
+    public PersonzAdapter(Picasso picasso) {
+        personList = new ArrayList<>();
         this.picasso = picasso;
     }
 
@@ -47,6 +50,11 @@ public class PersonzAdapter extends RecyclerView.Adapter<PersonzAdapter.ViewHold
     @Override
     public int getItemCount() {
         return personList.size();
+    }
+
+    public void setPersonList(List<Result> personList) {
+        this.personList = personList;
+        notifyDataSetChanged();
     }
 
     // Provide a reference to the views for each data item
