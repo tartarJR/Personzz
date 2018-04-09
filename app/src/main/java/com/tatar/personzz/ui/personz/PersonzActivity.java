@@ -47,6 +47,15 @@ public class PersonzActivity extends AppCompatActivity {
         personzzCall();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (call != null) {
+            call.cancel();
+        }
+    }
+
     private void initViews() {
         personzRecyclerView = findViewById(R.id.personz_recycler_view);
         personzRecyclerView.setLayoutManager(new LinearLayoutManager(this));
