@@ -25,23 +25,23 @@ import timber.log.Timber;
 
 public class PersonzActivity extends AppCompatActivity {
 
-    PersonzActivityComponent personzActivityComponent;
+    private RecyclerView personzRecyclerView;
+
+    @Inject
+    PersonzAdapter personzAdapter;
 
     @Inject
     PersonzzService personzzService;
 
     Call<PersonzResponse> call;
 
-    private RecyclerView personzRecyclerView;
-    private PersonzAdapter personzAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personz);
 
-        App.get(this).getAppComponent().inject(this);
-        personzActivityComponent = DaggerPersonzActivityComponent.builder().appComponent(App.get(this).getAppComponent()).build();
+        PersonzActivityComponent personzActivityComponent = DaggerPersonzActivityComponent.builder().appComponent(App.get(this).getAppComponent()).build();
+        personzActivityComponent.inject(this);
 
         initViews();
         personzzCall();
@@ -59,7 +59,6 @@ public class PersonzActivity extends AppCompatActivity {
     private void initViews() {
         personzRecyclerView = findViewById(R.id.personz_recycler_view);
         personzRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        personzAdapter = personzActivityComponent.personzAdapter();
         personzRecyclerView.setAdapter(personzAdapter);
     }
 

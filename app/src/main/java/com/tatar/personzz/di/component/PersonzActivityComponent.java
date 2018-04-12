@@ -2,7 +2,7 @@ package com.tatar.personzz.di.component;
 
 import com.tatar.personzz.di.annotation.PersonzActivityScope;
 import com.tatar.personzz.di.module.PersonzActivityModule;
-import com.tatar.personzz.ui.personz.PersonzAdapter;
+import com.tatar.personzz.ui.personz.PersonzActivity;
 
 import dagger.Component;
 
@@ -13,5 +13,5 @@ import dagger.Component;
 @Component(modules = PersonzActivityModule.class, dependencies = AppComponent.class)
 @PersonzActivityScope
 public interface PersonzActivityComponent {
-    PersonzAdapter personzAdapter();
+    void inject(PersonzActivity personzActivity);
 }
