@@ -2,11 +2,9 @@ package com.tatar.personzz.di.component;
 
 import com.squareup.picasso.Picasso;
 import com.tatar.personzz.data.network.PersonzzService;
+import com.tatar.personzz.di.annotation.PersonzAppScope;
 import com.tatar.personzz.di.module.PersonzzServiceModule;
 import com.tatar.personzz.di.module.PicassoModule;
-import com.tatar.personzz.ui.personz.PersonzActivity;
-
-import javax.inject.Singleton;
 
 import dagger.Component;
 
@@ -15,8 +13,9 @@ import dagger.Component;
  */
 
 @Component(modules = {PersonzzServiceModule.class, PicassoModule.class})
-@Singleton
+@PersonzAppScope
 public interface AppComponent {
     PersonzzService personzzService();
+
     Picasso picasso();
 }

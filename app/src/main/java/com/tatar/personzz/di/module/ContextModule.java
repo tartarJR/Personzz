@@ -2,7 +2,7 @@ package com.tatar.personzz.di.module;
 
 import android.content.Context;
 
-import javax.inject.Singleton;
+import com.tatar.personzz.di.annotation.PersonzAppScope;
 
 import dagger.Module;
 import dagger.Provides;
@@ -22,7 +22,7 @@ public class ContextModule {
     }
 
     @Provides
-    @Singleton
+    @PersonzAppScope
     public Context context() {
         return context.getApplicationContext();
     }

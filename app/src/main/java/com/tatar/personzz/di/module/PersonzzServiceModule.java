@@ -2,8 +2,7 @@ package com.tatar.personzz.di.module;
 
 import com.tatar.personzz.data.network.PersonzzService;
 import com.tatar.personzz.data.network.PersonzzServiceConstants;
-
-import javax.inject.Singleton;
+import com.tatar.personzz.di.annotation.PersonzAppScope;
 
 import dagger.Module;
 import dagger.Provides;
@@ -19,13 +18,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class PersonzzServiceModule {
 
     @Provides
-    @Singleton
+    @PersonzAppScope
     public PersonzzService personzzService(Retrofit retrofit) {
         return retrofit.create(PersonzzService.class);
     }
 
     @Provides
-    @Singleton
+    @PersonzAppScope
     public Retrofit retrofit(OkHttpClient okHttpClient, GsonConverterFactory gsonConverterFactory) {
         return new Retrofit.Builder()
                 .client(okHttpClient)
@@ -35,7 +34,7 @@ public class PersonzzServiceModule {
     }
 
     @Provides
-    @Singleton
+    @PersonzAppScope
     public GsonConverterFactory gsonConverterFactory() {
         return GsonConverterFactory.create();
     }

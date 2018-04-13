@@ -1,6 +1,6 @@
 package com.tatar.personzz.di.module;
 
-import javax.inject.Singleton;
+import com.tatar.personzz.di.annotation.PersonzAppScope;
 
 import dagger.Module;
 import dagger.Provides;
@@ -16,7 +16,7 @@ import timber.log.Timber;
 public class OkHttpClientModule {
 
     @Provides
-    @Singleton
+    @PersonzAppScope
     public OkHttpClient okHttpClient(HttpLoggingInterceptor httpLoggingInterceptor) {
         return new OkHttpClient()
                 .newBuilder()
@@ -25,7 +25,7 @@ public class OkHttpClientModule {
     }
 
     @Provides
-    @Singleton
+    @PersonzAppScope
     public HttpLoggingInterceptor httpLoggingInterceptor() {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
