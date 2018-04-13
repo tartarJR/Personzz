@@ -9,6 +9,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.OkHttpClient;
 
 /**
  * Created by mobile on 8.02.2018.
@@ -23,5 +24,11 @@ public class PicassoModule {
         return new Picasso.Builder(context).
                 downloader(okHttp3Downloader).
                 build();
+    }
+
+    @Provides
+    @Singleton
+    public OkHttp3Downloader okHttp3Downloader(OkHttpClient okHttpClient) {
+        return new OkHttp3Downloader(okHttpClient);
     }
 }

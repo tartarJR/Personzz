@@ -1,7 +1,5 @@
 package com.tatar.personzz.di.module;
 
-import com.jakewharton.picasso.OkHttp3Downloader;
-
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -24,12 +22,6 @@ public class OkHttpClientModule {
                 .newBuilder()
                 .addInterceptor(httpLoggingInterceptor)
                 .build();
-    }
-
-    @Provides
-    @Singleton
-    public OkHttp3Downloader okHttp3Downloader(OkHttpClient okHttpClient) {
-        return new OkHttp3Downloader(okHttpClient);
     }
 
     @Provides
