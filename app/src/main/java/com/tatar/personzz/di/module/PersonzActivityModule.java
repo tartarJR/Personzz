@@ -1,8 +1,7 @@
 package com.tatar.personzz.di.module;
 
-import com.squareup.picasso.Picasso;
 import com.tatar.personzz.di.annotation.PersonzActivityScope;
-import com.tatar.personzz.ui.personz.PersonzAdapter;
+import com.tatar.personzz.ui.personz.PersonzActivity;
 
 import dagger.Module;
 import dagger.Provides;
@@ -14,10 +13,16 @@ import dagger.Provides;
 @Module
 public class PersonzActivityModule {
 
+    private final PersonzActivity personzActivity;
+
+    public PersonzActivityModule(PersonzActivity personzActivity) {
+        this.personzActivity = personzActivity;
+    }
+
     @Provides
     @PersonzActivityScope
-    public PersonzAdapter personzAdapter(Picasso picasso) {
-        return new PersonzAdapter(picasso);
+    public PersonzActivity personzActivity() {
+        return personzActivity;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.tatar.personzz.ui.personz;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,17 +24,24 @@ import javax.inject.Inject;
 public class PersonzAdapter extends RecyclerView.Adapter<PersonzAdapter.ViewHolder> {
 
     private List<Result> personList;
+
     private final Picasso picasso;
+    private final Context context;
 
     @Inject
-    public PersonzAdapter(Picasso picasso) {
+    public PersonzAdapter(PersonzActivity personzActivity, Picasso picasso) {
         personList = new ArrayList<>();
+
         this.picasso = picasso;
+        this.context = personzActivity;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.person_list_item, parent, false);
+        // context can be reached like this as well
+        //View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.person_list_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.person_list_item, parent, false);
+
         return new ViewHolder(view);
     }
 

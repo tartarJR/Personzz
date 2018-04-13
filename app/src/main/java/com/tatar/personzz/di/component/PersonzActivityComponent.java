@@ -10,7 +10,7 @@ import dagger.Component;
  * Created by mobile on 9.04.2018.
  */
 
-@Component(modules = PersonzActivityModule.class, dependencies = AppComponent.class)
+@Component(dependencies = AppComponent.class, modules = PersonzActivityModule.class)
 @PersonzActivityScope
 public interface PersonzActivityComponent {
     void inject(PersonzActivity personzActivity);

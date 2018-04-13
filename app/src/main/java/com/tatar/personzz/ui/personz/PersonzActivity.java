@@ -13,6 +13,7 @@ import com.tatar.personzz.data.network.modal.PersonzResponse;
 import com.tatar.personzz.data.network.modal.Result;
 import com.tatar.personzz.di.component.DaggerPersonzActivityComponent;
 import com.tatar.personzz.di.component.PersonzActivityComponent;
+import com.tatar.personzz.di.module.PersonzActivityModule;
 
 import java.util.List;
 
@@ -40,7 +41,11 @@ public class PersonzActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personz);
 
-        PersonzActivityComponent personzActivityComponent = DaggerPersonzActivityComponent.builder().appComponent(App.get(this).getAppComponent()).build();
+        PersonzActivityComponent personzActivityComponent = DaggerPersonzActivityComponent.builder()
+                .personzActivityModule(new PersonzActivityModule(this))
+                .appComponent(App.get(this).getAppComponent())
+                .build();
+
         personzActivityComponent.inject(this);
 
         initViews();
